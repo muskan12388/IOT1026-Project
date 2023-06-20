@@ -31,5 +31,10 @@
         /// </summary>
         /// <returns>Returns a DisplayDetails object containing the monster's display information.</returns>
         public abstract DisplayDetails Display();
+
+        public void Activate(Hero hero, GameMap map)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

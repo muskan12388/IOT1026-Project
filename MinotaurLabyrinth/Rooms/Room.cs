@@ -77,5 +77,10 @@
             else
                 return new DisplayDetails("[ ]", ConsoleColor.Gray);
         }
+
+        public void Activate(Hero hero, GameMap map)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

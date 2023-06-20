@@ -1,6 +1,6 @@
 ﻿namespace MinotaurLabyrinth
 {
-    public interface IActivatable
+    public partial interface IActivatable
     {
         bool DisplaySense(Hero hero, int heroDistance);
         void Activate(Hero hero, Map map);
