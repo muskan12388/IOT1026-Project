@@ -9,7 +9,7 @@
         private static readonly Lazy<RoomFactory> _lazy = new(() => new RoomFactory());
 
         /// <summary>
-        /// Singleton instance of RoomFactory.
+        /// Gets the singleton instance of RoomFactory.
         /// </summary>
         public static RoomFactory Instance => _lazy.Value;
 

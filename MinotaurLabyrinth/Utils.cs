@@ -1,5 +1,8 @@
 ﻿namespace MinotaurLabyrinth
 {
+    /// <summary>
+    /// A utility class for generating random numbers.
+    /// </summary>
     public static class RandomNumberGenerator
     {
         private static Random _random;
@@ -49,13 +52,28 @@
         }
     }
 
+    /// <summary>
+    /// Represents the display details of a room, including the text to be displayed and its color.
+    /// </summary>
     public record DisplayDetails(string Text, System.ConsoleColor Color);
-    // Represents a location in the 2D game world, based on its row and column.
+
+    /// <summary>
+    /// Represents a location in the 2D game world, based on its row and column.
+    /// </summary>
     public record Location(int Row, int Column);
-    // Represents one of the four directions of movement.
+
+    /// <summary>
+    /// Represents one of the four directions of movement.
+    /// </summary>
     public enum Direction { North, South, West, East }
-    // Represents the size of the game map.
+
+    /// <summary>
+    /// Represents the size of the game map.
+    /// </summary>
     public enum Size { Small, Medium, Large };
-    // Must match class names for dynamic registering to work properly - not ideal.
-    public enum RoomType { Room, Entrance, Sword, Wall, Pit }
+
+    /// <summary>
+    /// Represents the types of rooms in the labyrinth.
+    /// </summary>
+    public enum RoomType { Room, Entrance, Sword, Wall, Pit, MyRoom }
 }

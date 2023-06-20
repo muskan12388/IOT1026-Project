@@ -13,17 +13,17 @@
         private Monster? _monster;
 
         /// <summary>
-        /// Gets the room type.
+        /// Gets the type of the room.
         /// </summary>
         public virtual RoomType Type { get; } = RoomType.Room;
 
         /// <summary>
-        /// Gets a value indicating whether the room is currently contains a monster or an event.
+        /// Gets or sets a value indicating whether the room is currently active, containing a monster or an event.
         /// </summary>
         public virtual bool IsActive { get; protected set; }
 
         /// <summary>
-        /// Adds a monster to the room.
+        /// Adds a monster to the room, making it active.
         /// </summary>
         /// <param name="monster">The monster to be added.</param>
         public void AddMonster(Monster monster)
@@ -33,7 +33,7 @@
         }
 
         /// <summary>
-        /// Removes a monster from the room.
+        /// Removes the monster from the room, deactivating it.
         /// </summary>
         public void RemoveMonster()
         {
@@ -67,7 +67,7 @@
         }
 
         /// <summary>
-        /// Displays the current state of the room.
+        /// Displays the current state of the room, including any monsters present.
         /// </summary>
         /// <returns>Returns a DisplayDetails object containing the room's display information.</returns>
         public virtual DisplayDetails Display()

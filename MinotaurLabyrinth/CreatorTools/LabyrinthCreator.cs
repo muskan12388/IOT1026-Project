@@ -1,23 +1,20 @@
 ﻿namespace MinotaurLabyrinth
 {
-    /// <summary>
-    /// A static class that provides methods to create and initialize a labyrinth map with various features, such as an entrance, sword, traps, and monsters.
-    /// </summary>
     public static class LabyrinthCreator
     {
         const int ScalingFactor = 16;
         static readonly Dictionary<Size, (int rows, int cols)> _mapSizeDimensions = new()
-    {
-        { Size.Small, (4, 4) },
-        { Size.Medium, (6, 6) },
-        { Size.Large, (8, 8) },
-    };
+        {
+            { Size.Small, (4, 4) },
+            { Size.Medium, (6, 6) },
+            { Size.Large, (8, 8) },
+        };
 
         /// <summary>
-        /// Initializes the labyrinth map with the specified size, and creates a new Hero at the entrance location.
+        /// Initializes the map and the player for the labyrinth game.
         /// </summary>
-        /// <param name="mapSize">The Size of the map to be created (Small, Medium, or Large).</param>
-        /// <returns>A tuple containing the initialized Map and the Hero placed at the entrance location.</returns>
+        /// <param name="mapSize">The size of the labyrinth map.</param>
+        /// <returns>A tuple containing the initialized map and the player (hero).</returns>
         public static (Map, Hero) InitializeMap(Size mapSize)
         {
             Map map = CreateMap(mapSize);
@@ -26,6 +23,11 @@
             return (map, InitializePlayer(start));
         }
 
+        /// <summary>
+        /// Creates a new map based on the specified size.
+        /// </summary>
+        /// <param name="mapSize">The size of the labyrinth map.</param>
+        /// <returns>A new instance of the Map class.</returns>
         private static Map CreateMap(Size mapSize)
         {
             if (!_mapSizeDimensions.TryGetValue(mapSize, out var dimensions))
@@ -37,10 +39,10 @@
         }
 
         /// <summary>
-        /// Creates a labyrinth map with randomly placed and non-overlapping features, such as the entrance, sword, traps, and monsters.
+        /// Randomizes the placement of rooms and entities on the map.
         /// </summary>
-        /// <param name="map">The Map to be randomized with features.</param>
-        /// <returns>The Location of the entrance in the randomized map.</returns>
+        /// <param name="map">The map to be randomized.</param>
+        /// <returns>The starting location for the player.</returns>
         private static Location RandomizeMap(Map map)
         {
             Location start = PlaceEntrance(map);
@@ -51,10 +53,10 @@
         }
 
         /// <summary>
-        /// Places the entrance room at a random edge location on the map.
+        /// Places the entrance of the labyrinth on an edge location of the map.
         /// </summary>
-        /// <param name="map">The map on which the entrance room will be placed.</param>
-        /// <returns>The location of the placed entrance room.</returns>
+        /// <param name="map">The map on which the entrance is placed.</param>
+        /// <returns>The location of the entrance.</returns>
         private static Location PlaceEntrance(Map map)
         {
             Location start = ProceduralGenerator.GetRandomEdgeLocation(map);
@@ -63,10 +65,10 @@
         }
 
         /// <summary>
-        /// Places the sword room at a random location on the map that is not adjacent to the specified start location.
+        /// Places the sword on a random location not adjacent to the player's starting location.
         /// </summary>
-        /// <param name="map">The map on which the sword room will be placed.</param>
-        /// <param name="start">The start location to avoid placing the sword room adjacent to.</param>
+        /// <param name="map">The map on which the sword is placed.</param>
+        /// <param name="start">The player's starting location.</param>
         private static void PlaceSword(Map map, Location start)
         {
             Location swordLocation = ProceduralGenerator.GetRandomLocationNotAdjacentTo(start);
@@ -74,11 +76,11 @@
         }
 
         /// <summary>
-        /// Adds a specified number of rooms of the given room type to the map.
+        /// Adds a specified number of rooms of the given type to the map.
         /// </summary>
-        /// <param name="roomType">The RoomType to be added to the map (e.g., Pit).</param>
-        /// <param name="map">The Map to which the rooms should be added.</param>
-        /// <param name="multiplier">An optional multiplier to scale the number of rooms to be added (default is 1).</param>
+        /// <param name="roomType">The type of room to add.</param>
+        /// <param name="map">The map on which the rooms are added.</param>
+        /// <param name="multiplier">The multiplier to determine the number of rooms to add.</param>
         private static void AddRooms(RoomType roomType, Map map, int multiplier = 1)
         {
             int numRooms = map.Rows * map.Columns * multiplier / ScalingFactor;
@@ -89,22 +91,21 @@
         }
 
         /// <summary>
-        /// Initializes a Hero at the specified starting location.
+        /// Initializes the player (hero) at the specified starting location.
         /// </summary>
-        /// <param name="start">The Location where the Hero should be initialized.</param>
-        /// <returns>A new Hero instance at the specified starting location.</returns>
+        /// <param name="start">The player's starting location.</param>
+        /// <returns>An instance of the Hero class representing the player.</returns>
         private static Hero InitializePlayer(Location start)
         {
             return new Hero(start);
         }
 
         /// <summary>
-        /// Initializes monsters in the map, ensuring they do not overlap with existing locations.
+        /// Initializes monsters on the map by adding a Minotaur to a random location.
         /// </summary>
-        /// <param name="map">The Map in which monsters should be initialized.</param>
+        /// <param name="map">The map on which monsters are initialized.</param>
         private static void InitializeMonsters(Map map)
         {
-            // Ensure monster locations do not overlap existing locations on the map
             Location minotaurLocation = ProceduralGenerator.GetRandomLocation();
             Room room = map.GetRoomAtLocation(minotaurLocation);
             room.AddMonster(new Minotaur());
