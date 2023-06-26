@@ -26,6 +26,20 @@ The Monster class has abstract methods for attacking the hero (Attack), moving t
 
 A mechanism for activating game components is represented by the IActivatable interface. It just declares the function Activate, which accepts two parameters: a Hero and a GameMap.
 
+Summary
+ list of the code changes is provided below:
+
+Within the MyMonster category:
+
+
+The constructor is changed to set the monster's characteristics for HealthPoints, AttackStrength, and Speed.
+The exact behaviour for the monster's movement, attack, and special ability is provided by overriding the Move(), Attack(), and SpecialAbility() functions.
+Three private methods are introduced as stand-ins for the implementation of the monster's movement, attack, and special ability logic: MoveTowardsHero(), ShootFireballs(), and IncreaseAttackStrength().
+
+In the class LabyrinthCreator:
+
+Instead of adding the previous Minotaur monster to the room in the map, the InitializeMonsters function is altered to create an instance of MyMonster.
+By adding an instance of MyMonster to the map during startup, these adjustments make sure that the MyMonster class has the appropriate characteristics and behaviour.
 
 
 

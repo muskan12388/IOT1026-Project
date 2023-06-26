@@ -1,5 +1,9 @@
 ﻿namespace MinotaurLabyrinth
 {
+    public static class NewBaseType
+    {
+    }
+
     public static class LabyrinthCreator
     {
         const int ScalingFactor = 16;
@@ -48,8 +52,13 @@
             Location start = PlaceEntrance(map);
             PlaceSword(map, start);
             AddRooms(RoomType.Pit, map);
-            InitializeMonsters(map);
+            NewMethod(map);
             return start;
+
+            static void NewMethod(Map map)
+            {
+                InitializeMonsters(map);
+            }
         }
 
         /// <summary>
