@@ -1,4 +1,4 @@
-// File: MyMonster.cs
+﻿// File: MyMonster.cs
 
 using MinotaurLabyrinth;
 
